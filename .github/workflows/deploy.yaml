@@ -1,0 +1,16 @@
+name: Deploy devops-app
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: repo checkout
+        uses: actions/checkout@v4
+
+      - name: build docker image
+        run: docker build -t devops-app:latest .
