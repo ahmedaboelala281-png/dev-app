@@ -18,7 +18,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+        aws-region: eu-west-3
 
     # 2. تسجيل الدخول على AWS ECR
     - name: Login to Amazon ECR
@@ -27,7 +27,7 @@ jobs:
     # 3. سحب الصورة (Pull) من AWS ECR
     - name: Pull Image from ECR
       run: |
-        docker pull ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-ecr-1:latest
+        docker pull ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-west-3.amazonaws.com/my-ecr-1:latest
 
     # 4. تسجيل الدخول على DockerHub
     - name: Login to DockerHub
@@ -39,5 +39,5 @@ jobs:
     # 5. إعادة تسمية (Tag) الصورة ورفعها لـ DockerHub
     - name: Tag and Push Image to DockerHub
       run: |
-        docker tag ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-ecr-1:latest ${{ secrets.DOCKERHUB_USERNAME }}/my-ecr-1:latest
+        docker tag ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-west-3.amazonaws.com/my-ecr-1:latest ${{ secrets.DOCKERHUB_USERNAME }}/my-ecr-1:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-ecr-1:latest
